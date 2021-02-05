@@ -217,7 +217,7 @@ class MinMaxFlow(object):
             mf += self.f
             if self.f==0:break
         
-        if mf==self.all_cost:
+        if mf==self.all_cost: #=26
             return True
         return False
     
@@ -248,6 +248,7 @@ if __name__ == "__main__":
     else:limit_combinations=-1
    
     x,index_map,map_name_to_index,map_index_to_name = preprocess(file_s=file_pd,file_in=file_index)
+
     Graph = [[1 for i in range(26)] for i in range(35)]
     #Graph[i][j] = hoc sinh j co the hoc ngay i
     for i in range(2,9):
@@ -273,7 +274,7 @@ if __name__ == "__main__":
             if max(item[i*2],item[i*2+1]) - min(item[i*2],item[i*2+1]) <= 8:
                 break
         else:
-            cal_xz.setup(item)
+            cal_xz.setup(item) # list(moi nhom hoc)
             ok =cal_xz.run_step()
             if not ok :continue
             ans = cal_xz.reduce_path_graph(map_name=lambda x:map_index_to_name[x])
@@ -293,3 +294,23 @@ if __name__ == "__main__":
     
 
 
+# 1 em co the hoc 2 buoi 
+# A ---->  B1 : N1
+# A ----> B1 : N2
+# em kho kiem soat dc lam sao group 9 thang vao 1 nhom
+# b1 -(9)> sink
+
+# 1 nhom co 9 nguoi :
+# 3 nhom moi nhom 2 buoi   
+# CHON 6 kip / 35 kip
+# 35C6 * 6!/90 <= 5*10^7 
+# 1,5, 7,9, 12,17
+# 1 7 5,9 12,17
+
+# bai toan cua em xep 26 em vao vao 3 cap buoi do 
+# 1em-> 1 nhom: trong so 1
+# nguon la 26 em:
+# dich 3 nhom hoc
+# source-> 26 (1)
+# 3 nhom -> sink (1)
+# tong=26 
